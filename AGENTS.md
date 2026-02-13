@@ -2,6 +2,8 @@
 
 A general-purpose AI assistant for productivity, communication, and knowledge work.
 
+Use the `/help` command or ask "What skills do you have?" to see detailed capabilities.
+
 **Important:** When resolving "me" / "my" / "I" references, first query the appropriate platform (Slack API, Gmail API, Notion API) to identify the user's actual username. Do not assume - always verify.
 
 ---
@@ -15,36 +17,6 @@ A general-purpose AI assistant for productivity, communication, and knowledge wo
 
 ---
 
-## Skills Available
-
-This agent has access to:
-- **Communication**: Slack, Gmail
-- **Productivity**: Notion, Google Sheets
-- **Intelligence**: Web research (Firecrawl), AI generation (OpenAI)
-- **Utilities**: File/media hosting (Cloudinary), self-management (VM0 CLI)
-
-Use the `/help` command or ask "What skills do you have?" to see detailed capabilities.
-
----
-
-## Memory & Context
-
-### Cross-Session Memory
-
-Store important information for future reference:
-
-**Storing Information:**
-- "Remember that I prefer short summaries"
-- "Note that our team meeting is every Monday at 10am"
-- "Store my preference for markdown format"
-
-**Recalling Information:**
-- "What do you remember about my preferences?"
-- "Recall what we discussed about the project"
-- "What's my team meeting schedule?"
-
-Memory is stored in Notion databases for persistence across sessions.
-
 ### Image Analysis
 
 When encountering image URLs in messages or documents:
@@ -57,34 +29,6 @@ When encountering image URLs in messages or documents:
 2. **Analyze** the downloaded image to understand its content
 
 This enables visual context understanding for screenshots, diagrams, and UI mockups.
-
----
-
-## File & Document Management
-
-### Organizing Files
-
-**Download and organize files:**
-```
-"Download the attachments from my latest email and organize them by type"
-"Save these files to Cloudinary and create a Notion page with links"
-```
-
-### Working with Documents
-
-**Create and manage documents:**
-```
-"Create a Notion page summarizing today's meeting"
-"Update the project tracker spreadsheet with these numbers"
-"Generate a PDF report from this data"
-```
-
-### File Storage
-
-Files are stored in Cloudinary (cloud storage) for persistence and easy sharing:
-- Upload images, documents, PDFs
-- Get permanent CDN URLs
-- Share across team
 
 ---
 
@@ -261,7 +205,7 @@ Configure schedules via the VM0 platform or using vm0-cli.
 **Content transformation:**
 ```
 "Make this email more professional"
-"Translate this message to Chinese"
+"Translate this message"
 "Rewrite this in a friendly tone"
 ```
 
@@ -328,8 +272,7 @@ To extend your assistant with additional skills:
 
 1. **Browse available skills**: https://github.com/vm0-ai/vm0-skills
 2. **Update vm0.yaml** with new skill URLs
-3. **Add required environment variables** in VM0 platform secrets
-4. **Redeploy** with `vm0 compose`
+3. **Redeploy** with `vm0 compose`
 
 ### Example: Adding GitHub Integration
 
@@ -338,8 +281,6 @@ skills:
   # ... existing skills ...
   - https://github.com/vm0-ai/vm0-skills/tree/main/github
 ```
-
-Then add `GH_TOKEN` to your secrets.
 
 ### Checking Status
 
@@ -388,35 +329,8 @@ Then add `GH_TOKEN` to your secrets.
 
 - All API credentials are stored securely as VM0 secrets
 - No data is persisted in /tmp between sessions
-- Use Notion/cloud storage for persistent data
-- Memory is stored in your Notion workspace
 - Agent runs in isolated sandbox environment
 
 ---
-
-## Limitations & Workarounds
-
-### No Local File System Access
-**Limitation:** Cannot directly access your computer's desktop or downloads folder
-**Workaround:** Upload files to Cloudinary or share via Slack/email
-
-### No Calendar Integration (Yet)
-**Limitation:** Cannot directly access Google Calendar or submit leave requests
-**Workaround:** Create calendar events manually or use Notion as a calendar proxy
-
-### No Direct Desktop Notifications
-**Limitation:** Cannot send OS-level notifications
-**Workaround:** Use Slack DMs or email for notifications
-
----
-
-## What's Next?
-
-This agent is designed to be customizable. Based on your needs:
-
-- **For developers**: Add GitHub, Linear, monitoring tools
-- **For sales teams**: Add CRM tools (Streak, HubSpot)
-- **For content creators**: Add social media, video generation tools
-- **For support teams**: Add customer service tools (Zendesk, Intercom)
 
 Browse the full skill catalog at: https://github.com/vm0-ai/vm0-skills
